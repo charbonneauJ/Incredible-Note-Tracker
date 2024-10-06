@@ -11,9 +11,8 @@ Render -
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![Week 11 Challenge](https://github.com/user-attachments/assets/0dcbb301-f8ed-4669-b14d-820d9b3a0831)
 
 ## 🚀 About Me
-I'm a full stack developer in training, here is my Github...
+I'm a full stack developer in training, here is my Github - https://github.com/charbonneauJ
 
