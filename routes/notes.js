@@ -20,7 +20,7 @@ notes.get("/api/notes", (req, res) => {
 });
 
 notes.post("/api/notes", (req, res) => {
-  fs.readFile(path.join(__dirname, "db.json"), "UTF8", (err, data) => {
+  fs.readFile(path.join(__dirname, "../db/db.json"), "UTF8", (err, data) => {
     if (err) {
       return res.status(500).send("Error reading notes");
     }
@@ -35,7 +35,7 @@ notes.post("/api/notes", (req, res) => {
     notes.push(newNote);
 
     fs.writeFile(
-      path.join(__dirname, "db.json"),
+      path.join(__dirname, "../db/db.json"),
       JSON.stringify(notes, null, 2),
       (err) => {
         if (err) {

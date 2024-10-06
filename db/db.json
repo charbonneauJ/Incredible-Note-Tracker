@@ -1,6 +1,12 @@
 [
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
+  {
+    "id": "uuidv4()",
+    "title": "Test Title",
+    "text": "Test text"
+  },
+  {
+    "id": "e9e37ff8-692f-448d-9555-6cdfc57427bc",
+    "title": "a",
+    "text": "b"
+  }
 ]
