@@ -1,19 +1,50 @@
 const notes = require("express").Router();
-
-app.get("/", (req, res) => {
-  res.send("GET request to the homepage");
-});
-
-app.post("/", function (req, res) {
-  res.send("POST request to the homepage");
-});
+const path = require("path");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.json());
+notes.use(bodyParser.json());
 
-app.delete("/products/:id", function (req, res) {
-  const { id } = req.params;
-  res.send(`Delete record with id ${id}`);
+notes.get("/notes", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 
-module.export = notes;
+notes.get("/api/notes", (req, res) => {
+  fs.readFile(path.join(__dirname, "../db/db.json"), "UTF8", (err, data) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(JSON.parse(data));
+  });
+});
+
+notes.post("/api/notes", (req, res) => {
+  fs.readFile(path.join(__dirname, "db.json"), "UTF8", (err, data) => {
+    if (err) {
+      return res.status(500).send("Error reading notes");
+    }
+    const notes = JSON.parse(data);
+
+    const newNote = {
+      id: uuidv4(),
+      title: req.body.title,
+      text: req.body.text,
+    };
+
+    notes.push(newNote);
+
+    fs.writeFile(
+      path.join(__dirname, "db.json"),
+      JSON.stringify(notes, null, 2),
+      (err) => {
+        if (err) {
+          return res.status(500).send("Error saving note");
+        }
+        res.json(newNote);
+      }
+    );
+  });
+});
+
+module.exports = notes;
